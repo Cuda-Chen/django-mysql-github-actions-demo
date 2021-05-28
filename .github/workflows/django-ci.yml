@@ -14,6 +14,13 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.7]
+    env: 
+      DBENGINE: django.db.backends.mysql
+      DBNAME: mysql
+      DBUSER: root
+      DBPASSWORD: zergling
+      DBHOST: 127.0.0.1
+      DBPORT: ${{ job.services.mysql.ports[3306] }}
 
     services:
       mysql:
@@ -36,12 +43,5 @@ jobs:
     - name: Run Migrations
       run: python manage.py migrate
     - name: Run Tests
-      env: 
-        DBENGINE: django.db.backends.mysql
-        DBNAME: mysql
-        DBUSER: root
-        DBPASSWORD: zergling
-        DBHOST: 127.0.0.1
-        DBPORT: ${{ job.services.mysql.ports[3306] }}
       run: |
         python manage.py test
