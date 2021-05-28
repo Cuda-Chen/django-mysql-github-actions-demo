@@ -20,7 +20,7 @@ jobs:
       DBUSER: root
       DBPASSWORD: zergling
       DBHOST: 127.0.0.1
-      DBPORT: ${{ job.test.services.mysql.ports[3306] }}
+      DBPORT: ${{ jobs.test.services.mysql.ports[3306] }}
 
     services:
       mysql:
